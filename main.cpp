@@ -1,6 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include "Functions.h"
+#include "Player_X.h"
+#include "Player_Y.h"
 
 using namespace std;
 
