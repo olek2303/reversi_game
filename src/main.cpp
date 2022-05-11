@@ -3,6 +3,7 @@
 #include "Functions.h"
 #include "Player_X.h"
 #include "Player_Y.h"
+#include "BaseClass.h"
 
 using namespace std;
 
