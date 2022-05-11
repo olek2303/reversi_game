@@ -13,5 +13,7 @@ int main() {
 	int x = ktore_pole_x();
 	int y = ktore_pole_y();
 
+	cout << "Making sure that everyting works" << endl;
+
 	return 0;
 }
