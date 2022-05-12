@@ -1,5 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include <stdlib.h>
+#include <string.h>
+#include <cstdlib>
 #include "Functions.h"
 #include "Player_X.h"
 #include "Player_Y.h"
@@ -7,20 +10,12 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char* argv[]) {
 
 	cout << "--------- REVERSI GAME C++ ---------" << endl << endl;
+
 	int x = ktore_pole_x();
 	int y = ktore_pole_y();
-	
-	Player_X px;
-	Player_Y py;
-
-	px.setX(x);
-	px.setY(y);
-
-	py.nast->showDesk();
-
 
 	return 0;
 } 
