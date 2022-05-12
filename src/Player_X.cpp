@@ -5,6 +5,7 @@
 using namespace std;
 
 Player_X::Player_X() {
-	x = 3;
-	y = 3;
+	head->x = x = 4;
+	head->y = y = 4;
+	nast = head->nast;
 }

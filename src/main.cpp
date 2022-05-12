@@ -12,8 +12,15 @@ int main() {
 	cout << "--------- REVERSI GAME C++ ---------" << endl << endl;
 	int x = ktore_pole_x();
 	int y = ktore_pole_y();
+	
+	Player_X px;
+	Player_Y py;
 
-	cout << "Making sure that everyting works" << endl;
+	px.setX(x);
+	px.setY(y);
+
+	py.nast->showDesk();
+
 
 	return 0;
-}
+} 
