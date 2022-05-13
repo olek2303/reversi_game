@@ -6,7 +6,7 @@ class Player_X : public Player_Y {
 	int y;
 public:
 	Player_X();
-	void setX_Y(int x_p, int y_p) { x = x_p; y = y_p; };
+	void setX_Y(int x_p, int y_p);
 	int get_X() { return x; };
 	int get_Y() { return y; };
 	~Player_X() { };

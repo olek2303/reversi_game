@@ -13,9 +13,18 @@ using namespace std;
 int main(int argc, char* argv[]) {
 
 	cout << "--------- REVERSI GAME C++ ---------" << endl << endl;
-
-	int x = ktore_pole_x();
-	int y = ktore_pole_y();
+	
+	for (int i = 0; i < 8; i++) {
+		for (int j = 0; j < 8; j++) {
+			if (i == 4 && j == 4) 
+				cout << " X ";
+			else if (i == 3 && j == 3)
+				cout << " O ";
+			else 
+				cout << " . ";
+		}
+		cout << endl;
+	}
 
 	return 0;
 } 
