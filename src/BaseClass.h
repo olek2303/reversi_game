@@ -6,6 +6,11 @@ class Base : public Player_X{
 public:
 	Base();
 	void showDesk();
-	void fillDesk(Player_X* px, Player_Y* py);
-	~Base() { delete[] tab; };
+	void getFromX(Player_X* px, int x1, int y1);
+	void getFromY(Player_Y* py, int x1, int y1);
+	void fillDesk(Base* b, Player_X* px, Player_Y* py);
+	bool checkIfComplete();
+	int countX();
+	int countY();
+	~Base() { };
 };
