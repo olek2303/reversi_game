@@ -8,6 +8,7 @@ class Base : public Player_X{
 public:
 	Base();
 	void showDesk();
+	void setStartParameters(Player_X* px, Player_Y* py);
 	void getFromX(Player_X* px, int x1, int y1);
 	void getFromY(Player_Y* py, int x1, int y1);
 	bool checkIfComplete();
