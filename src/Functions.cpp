@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "Functions.h"
+#include "Functions.hpp"
 #include <iostream>
 
 using namespace std;

@@ -2,11 +2,13 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string.h>
+#include <cstring>
 #include <cstdlib>
-#include "Functions.h"
-#include "Player_X.h"
-#include "Player_Y.h"
-#include "BaseClass.h"
+#include <cstdio>
+#include "Functions.hpp"
+#include "Player_X.hpp"
+#include "Player_Y.hpp"
+#include "BaseClass.hpp"
 
 using namespace std;
 
@@ -17,10 +19,13 @@ int main(int argc, char* argv[]) {
 	int counter = 0;
 	int x = 0;
 	int y = 0;
+
+	cout << "SADASDASD";
 	Player_X* px = new Player_X();
 	Player_Y* py = new Player_Y();
 	Base* b = new Base();
 	b->showDesk();
+
 
 	system("cls");
 	while (b->checkIfComplete() != 1) {
@@ -30,7 +35,6 @@ int main(int argc, char* argv[]) {
 		else {
 			b->getFromY(py, x, y);
 		}
-		b->fillDesk(b, px, py);
 		b->showDesk();
 		counter++;
 	}
