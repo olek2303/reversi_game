@@ -6,7 +6,6 @@ public:
 	File();
 	void setNazwa(char n[20]);
 	char* getNazwa();
-	void openFile();
-	void closeFile();
+	void addToFile(int pkt);
 	~File() { };
 };

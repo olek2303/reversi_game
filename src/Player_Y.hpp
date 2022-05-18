@@ -1,6 +1,9 @@
 #pragma once
+#include "Player_Y_abstr.hpp"
+#ifndef Player_Y_abstr_hpp
+#define Player_Y_abstr_hpp
 
-class Player_Y {
+class Player_Y : public Player_Y_abstr{
 	int x;
 	int y;
 public:
@@ -11,3 +14,5 @@ public:
 	int get_Y() { return y; };
 	~Player_Y() { };
 };
+
+#endif
