@@ -6,7 +6,7 @@ using namespace std;
 
 Player_Y::Player_Y() {
 	x = 3;
-	y = 3;
+	y = 4;
 }
 
 int Player_Y::setX() {
