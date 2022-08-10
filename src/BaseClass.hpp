@@ -7,6 +7,7 @@ class Base : public Player_X{
 	char tab[8][8];
 public:
 	Base();
+	void infoGame();
 	void showDesk();
 	void setStartParameters(Player_X* px, Player_Y* py);
 	void getFromX(Player_X* px, int x1, int y1);
