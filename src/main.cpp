@@ -54,11 +54,6 @@ int main(int argc, char* argv[]) {
 	}
 	
 	b->setStartParameters(px, py);
-	px->setX1(3);
-	px->setY1(3);
-	py->setX1(4);
-	py->setY1(3);
-	b->setStartParameters(px, py);
 	b->showDesk();
 
 	while (b->checkIfComplete() != 1) {
@@ -70,6 +65,7 @@ int main(int argc, char* argv[]) {
 			b->getFromY(py, x, y);
 		}
 		b->showDesk();
+		b->checkIfComplete();
 		//system("cls");
 
 		counter++;

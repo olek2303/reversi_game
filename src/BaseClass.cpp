@@ -31,12 +31,40 @@ void Base::showDesk() {
 }
 
 void Base::setStartParameters(Player_X* px, Player_Y* py) {
-	int x = px->get_X();
-	int y = px->get_Y();
-	tab[x][y] = 'X';
-	x = py->get_X();
-	y = py->get_X();
-	tab[x][y] = 'Y';
+	tab[3][3] = 'X';
+	tab[4][4] = 'X';
+	tab[3][4] = 'Y';
+	tab[4][3] = 'Y';
+
+}
+
+bool Base::isValidMove(Player_X* px, Player_Y* py, int c) {
+	int x, y;
+	if (c % 2 == 0) {
+		x = px->get_X();
+		y = px->get_Y();
+	}
+	else {
+		x = py->get_X();
+		y = py->get_Y();
+	}
+
+	for (int i = 0; i < 8; i++) {
+		for (int j = 0; j < 8; j++) {
+			if (c % 2 == 0) {
+				if (tab[i][j] == 'X') {
+
+				}
+				if (tab[i][j] == 'Y') {
+
+				}
+				if (tab[i][j] == '.') {
+
+				}
+			}
+		}
+	}
+	return 0;
 }
 
 void Base::getFromX(Player_X* px, int x1, int y1) {
@@ -46,7 +74,6 @@ void Base::getFromX(Player_X* px, int x1, int y1) {
 		y1 = px->setY();
 		if (tab[x1 - 1][y1 - 1] == 'X' && tab[x1][y1] == '.' && x1 - 1 >= 0 && y1 - 1 >= 0) {
 			tab[x1][y1] = 'X';
-			cout << "Mozesz postawic tu swoj Y" << endl;
 			for (int i = x1 - 1; i >= 0; i--) {
 				for (int j = y1 - 1; j >= 0; j--) {
 					if (tab[i][j] == 'Y') {
@@ -239,7 +266,6 @@ void Base::getFromY(Player_Y* py, int x2, int y2) {
 		y2 = py->setY();
 		if (tab[x2 - 1][y2 - 1] == 'Y' && tab[x2][y2] == '.' && x2 - 1 >= 0 && y2 - 1 >= 0) {
 			tab[x2][y2] = 'Y';
-			cout << "Mozesz postawic tu swoj Y" << endl;
 			for (int i = x2 - 1; i >= 0; i--) {
 				for (int j = y2 - 1; j >= 0; j--) {
 					if (tab[i][j] == 'X') {
@@ -303,7 +329,6 @@ void Base::getFromY(Player_Y* py, int x2, int y2) {
 		}
 		else if (tab[x2 + 1][y2 + 1] == 'Y' && tab[x2][y2] == '.' && x2 + 1 < 8 && y2 + 1 < 8) {
 			tab[x2][y2] = 'Y';
-			cout << "Mozesz postawic tu swoj Y" << endl;
 			for (int i = x2 + 1; i < 8; i++) {
 				for (int j = y2 + 1; j < 8; j++) {
 					if (tab[i][j] == 'X') {
@@ -367,7 +392,6 @@ void Base::getFromY(Player_Y* py, int x2, int y2) {
 		}
 		else if (tab[x2 + 1][y2 - 1] == 'Y' && tab[x2][y2] == '.' && x2 + 1 < 8 && y2 - 1 >= 0) {
 			tab[x2][y2] = 'Y';
-			cout << "Mozesz postawic tu swoj Y" << endl;
 			for (int i = x2 + 1; i < 8; i++) {
 				for (int j = y2 - 1; j >= 0; j--) {
 					if (tab[i][j] == 'X') {
@@ -393,7 +417,6 @@ void Base::getFromY(Player_Y* py, int x2, int y2) {
 		}
 		else if (tab[x2 - 1][y2 + 1] == 'Y' && tab[x2][y2] == '.' && y2 + 1 < 8 && x2 - 1 >= 0) {
 			tab[x2][y2] = 'Y';
-			cout << "Mozesz postawic tu swoj Y" << endl;
 			for (int i = x2 - 1; i >= 0; i--) {
 				for (int j = y2 + 1; j < 8; j++) {
 					if (tab[i][j] == 'X') {
@@ -429,6 +452,18 @@ bool Base::checkIfComplete() {
 		for (int j = 0; j < 8; j++) {
 			if (tab[i][j] == '.')
 				return 0;
+		}
+	}
+	bool f = 0;
+	for (int i = 0; i < 8; i++) {
+		for (int j = 0; j < 8; j++) {
+			if (tab[i][j] == 'X') {
+				f = 1;
+			}
+			if (f == 1 && tab[i][j] == 'Y') {
+				return 0;
+			}
+			else { return 1; }
 		}
 	}
 	return 1;
