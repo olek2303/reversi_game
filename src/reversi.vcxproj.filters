@@ -27,16 +27,46 @@
     <ClCompile Include="Player_Y.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="BaseClass.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="File.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_Y-1p.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_Y-2p.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_Y_abstr.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Functions.h">
-      <Filter>Pliki źródłowe</Filter>
+    <ClInclude Include="Player_Y.hpp">
+      <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="Player_X.h">
-      <Filter>Pliki źródłowe</Filter>
+    <ClInclude Include="Player_X.hpp">
+      <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="Player_Y.h">
-      <Filter>Pliki źródłowe</Filter>
+    <ClInclude Include="Functions.hpp">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseClass.hpp">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="File.hpp">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_Y-1p.hpp">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_Y-2p.hpp">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_Y_abstr.hpp">
+      <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

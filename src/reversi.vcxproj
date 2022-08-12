@@ -139,15 +139,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseClass.cpp" />
+    <ClCompile Include="File.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player_X.cpp" />
+    <ClCompile Include="Player_Y-1p.cpp" />
+    <ClCompile Include="Player_Y-2p.cpp" />
     <ClCompile Include="Player_Y.cpp" />
+    <ClCompile Include="Player_Y_abstr.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Functions.h" />
-    <ClInclude Include="Player_X.h" />
-    <ClInclude Include="Player_Y.h" />
+    <ClInclude Include="BaseClass.hpp" />
+    <ClInclude Include="File.hpp" />
+    <ClInclude Include="Functions.hpp" />
+    <ClInclude Include="Player_X.hpp" />
+    <ClInclude Include="Player_Y-1p.hpp" />
+    <ClInclude Include="Player_Y-2p.hpp" />
+    <ClInclude Include="Player_Y.hpp" />
+    <ClInclude Include="Player_Y_abstr.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

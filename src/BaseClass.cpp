@@ -68,168 +68,14 @@ bool Base::isValidMove(Player_X* px, Player_Y* py, int c) {
 }
 
 void Base::getFromX(Player_X* px, int x1, int y1) {
-	bool check = 0;
-	while (check == 0) {
-		x1 = px->setX();
-		y1 = px->setY();
-		if (tab[x1 - 1][y1 - 1] == 'X' && tab[x1][y1] == '.' && x1 - 1 >= 0 && y1 - 1 >= 0) {
-			tab[x1][y1] = 'X';
-			for (int i = x1 - 1; i >= 0; i--) {
-				for (int j = y1 - 1; j >= 0; j--) {
-					if (tab[i][j] == 'Y') {
-						int c1 = i;
-						int c2 = j;
-						while (tab[c1][c2] == 'Y' || (c1 >= 0 && c2 >= 0)) {
-							if (tab[c1][c2] == 'X') {
-								//przejmij dotychczasowe pola 
-								while (c1 != x1) {
-									tab[c1][c2] = 'X';
-									c1++;
-									c2++;
-								}
-								break;
-							}
-							c1--;
-							c2--;
-						}
-					}
-				}
+	x1 = px->setX();
+	y1 = px->setY();
+	for (int i = -1; i <= 1; i++) { //nad tym pomyslec !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		for (int j = -1; j <= 1; j++) {
+			if (tab[x1 + i][y1 + j] == 'Y') {
+				tab[x1 + i][y1 + j] = 'X';
 			}
-			check = 1;
-		}
-		else if (tab[x1][y1 - 1] == 'X' && tab[x1][y1] == '.' && y1 - 1 >= 0) {
-			tab[x1][y1] = 'X';
-			for (int j = y1 - 1; j >= 0; j--) {
-				if (tab[x1][j] == 'Y') {
-					int c = j;
-					while (tab[x1][c] == 'Y' || c >= 0) {
-						if (tab[x1][c] == 'X') {
-							while (c != x1) {
-								tab[x1][c] = 'X';
-								c++;
-							}
-							break;
-						}
-						c--;
-					}
-				}
-			}
-			check = 1;
-		}
-		else if (tab[x1 - 1][y1] == 'X' && tab[x1][y1] == '.' && x1 - 1 >= 0) {
-			tab[x1][y1] = 'X';
-			for (int i = y1 - 1; i >= 0; i--) {
-				if (tab[i][y1] == 'X') {
-					int c = i;
-					while (tab[c][y1] == 'Y' || c >= 0) {
-						if (tab[c][y1] == 'X') {
-							while (c != x1) {
-								tab[c][y1] = 'X';
-								c++;
-							}
-							break;
-						}
-						c--;
-					}
-				}
-			}
-			check = 1;
-		}
-		else if (tab[x1 + 1][y1 + 1] == 'X' && tab[x1][y1] == '.' && x1 + 1 < 8 && y1 + 1 < 8) {
-			tab[x1][y1] = 'X';
-			cout << "Mozesz postawic tu swoj Y" << endl;
-			for (int i = x1 + 1; i < 8; i++) {
-				for (int j = y1 + 1; j < 8; j++) {
-					if (tab[i][j] == 'Y') {
-						int c1 = i;
-						int c2 = j;
-						while (tab[c1][c2] == 'Y' || (c1 >= 0 && c2 >= 0)) {
-							if (tab[c1][c2] == 'X') {
-								//przejmij dotychczasowe pola 
-								while (c1 != x1) {
-									tab[c1][c2] = 'Y';
-									c1--;
-									c2--;
-								}
-								break;
-							}
-							c1++;
-							c2++;
-						}
-					}
-				}
-			}
-			check = 1;
-		}
-		else if (tab[x1][y1 + 1] == 'X' && tab[x1][y1] == '.' && y1 + 1 < 8) {
-			tab[x1][y1] = 'X';
-			for (int j = y1 + 1; j < 8; j++) {
-				if (tab[x1][j] == 'Y') {
-					int c = j;
-					while (tab[x1][c] == 'Y' || c >= 0) {
-						if (tab[x1][c] == 'X') {
-							while (c != x1) {
-								tab[x1][c] = 'X';
-								c--;
-							}
-							break;
-						}
-						c++;
-					}
-				}
-			}
-			check = 1;
-		}
-		else if (tab[x1 + 1][y1] == 'X' && tab[x1][y1] == '.' && x1 + 1 < 8) {
-		tab[x1][y1] = 'X';
-			for (int i = x1 + 1; i < 8; i++) {
-				if (tab[i][y1] == 'Y') {
-					int c = i;
-					while (tab[c][y1] == 'Y' || c >= 0) {
-						if (tab[c][y1] == 'X') {
-							while (c != x1) {
-								tab[c][y1] = 'X';
-								c--;
-							}
-							break;
-						}
-						c++;
-					}
-				}
-			}
-			check = 1;
-		}
-		else if (tab[x1 + 1][y1 - 1] == 'X' && tab[x1][y1] == '.' && x1 + 1 < 8 && y1 - 1 >= 0) {
-			tab[x1][y1] = 'X';
-			cout << "Mozesz postawic tu swoj Y" << endl;
-			for (int i = x1 + 1; i < 8; i++) {
-				for (int j = y1 - 1; j >= 0; j--) {
-					if (tab[i][j] == 'Y') {
-						int c1 = i;
-						int c2 = j;
-						while (tab[c1][c2] == 'Y' || (c1 >= 0 && c2 >= 0)) {
-							if (tab[c1][c2] == 'X') {
-								//przejmij dotychczasowe pola 
-								while (c1 != x1) {
-									tab[c1][c2] = 'X';
-									c1--;
-									c2++;
-								}
-								break;
-							}
-							c1++;
-							c2--;
-						}
-					}
-				}
-			}
-			check = 1;
-		}
-		else if (tab[x1 - 1][y1 + 1] == 'X' && tab[x1][y1] == '.' && y1 + 1 < 8 && x1 - 1 >= 0) {
-			tab[x1][y1] = 'X';
-			cout << "Mozesz postawic tu swoj Y" << endl;
-			for (int i = x1 - 1; i >= 0; i--) {
-				for (int j = y1 + 1; j < 8; j++) {
+				/*
 					if (tab[i][j] == 'Y') {
 						int c1 = i;
 						int c2 = j;
@@ -247,13 +93,23 @@ void Base::getFromX(Player_X* px, int x1, int y1) {
 							c2++;
 						}
 					}
-				}
-			}
-			check = 1;
-		}
-		else {
-		cout << "NIE MOZESZ W TAKI SPOSOB WYKONAC SWOJEGO RUCHU, SPROBUJ PONOWNIE" << endl;
-			check = 0;
+				*/
+
+				/*
+					if (tab[i][y1] == 'Y') {
+					int c = i;
+					while (tab[c][y1] == 'Y' || c >= 0) {
+						if (tab[c][y1] == 'X') {
+							while (c != x1) {
+								tab[c][y1] = 'X';
+								c--;
+							}
+							break;
+						}
+						c++;
+					}
+				*/
+
 		}
 	}
 }
