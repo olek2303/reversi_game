@@ -129,18 +129,20 @@ void Base::getFromY(Player_Y* py, int x2, int y2) {
 		//5. sprawdz skosy TB
 
 		//sprawdzam skos prawa gora TB
-		for (int i = y2; i > -1; i--) {
+		for (int i = y2; i < 8; i++) {
 			if (tab[x2][i] == 'Y') {
-				for (int j = y2 - 1; j > i; j--) {
-					if (tab[x2][j] == '.') {//sytuacja ze jest puste miedzy polami
+				int k = x2 - 1;
+				for (int j = y2 + 1; j < i; j++) {
+					if (tab[k][j] == '.') {//sytuacja ze jest puste miedzy polami
 						check = 0;
 						break;
 					}
-					if (tab[x2][j] == 'X') {
+					if (tab[k][j] == 'X') {
 						tab[x2][y2] = 'Y';
-						tab[x2][j] = 'Y';
+						tab[k][j] = 'Y';
 						check = 1;
 					}
+					k--;
 				}
 				if (check == 1)
 					break;
@@ -150,16 +152,18 @@ void Base::getFromY(Player_Y* py, int x2, int y2) {
 		//sprawdzam skos lewa gora TB
 		for (int i = y2; i > -1; i--) {
 			if (tab[x2][i] == 'Y') {
+				int k = x2 - 1;
 				for (int j = y2 - 1; j > i; j--) {
-					if (tab[x2][j] == '.') {//sytuacja ze jest puste miedzy polami
+					if (tab[k][j] == '.') {//sytuacja ze jest puste miedzy polami
 						check = 0;
 						break;
 					}
-					if (tab[x2][j] == 'X') {
+					if (tab[k][j] == 'X') {
 						tab[x2][y2] = 'Y';
-						tab[x2][j] = 'Y';
+						tab[k][j] = 'Y';
 						check = 1;
 					}
+					k--;
 				}
 				if (check == 1)
 					break;
@@ -167,18 +171,20 @@ void Base::getFromY(Player_Y* py, int x2, int y2) {
 		}
 
 		//sprawdzam skos prawa dol TB
-		for (int i = y2; i > -1; i--) {
+		for (int i = y2; i < 8; i++) {
 			if (tab[x2][i] == 'Y') {
-				for (int j = y2 - 1; j > i; j--) {
-					if (tab[x2][j] == '.') {//sytuacja ze jest puste miedzy polami
+				int k = x2 + 1;
+				for (int j = y2 + 1; j < i; j++) {
+					if (tab[k][j] == '.') {//sytuacja ze jest puste miedzy polami
 						check = 0;
 						break;
 					}
-					if (tab[x2][j] == 'X') {
+					if (tab[k][j] == 'X') {
 						tab[x2][y2] = 'Y';
-						tab[x2][j] = 'Y';
+						tab[k][j] = 'Y';
 						check = 1;
 					}
+					k++;
 				}
 				if (check == 1)
 					break;
@@ -188,16 +194,18 @@ void Base::getFromY(Player_Y* py, int x2, int y2) {
 		//sprawdzam skos lewa dol TB
 		for (int i = y2; i > -1; i--) {
 			if (tab[x2][i] == 'Y') {
+				int k = x2 + 1;
 				for (int j = y2 - 1; j > i; j--) {
-					if (tab[x2][j] == '.') {//sytuacja ze jest puste miedzy polami
+					if (tab[k][j] == '.') {//sytuacja ze jest puste miedzy polami
 						check = 0;
 						break;
 					}
-					if (tab[x2][j] == 'X') {
+					if (tab[k][j] == 'X') {
 						tab[x2][y2] = 'Y';
-						tab[x2][j] = 'Y';
+						tab[k][j] = 'Y';
 						check = 1;
 					}
+					k++;
 				}
 				if (check == 1)
 					break;
