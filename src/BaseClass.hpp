@@ -10,7 +10,6 @@ public:
 	void infoGame();
 	void showDesk();
 	void setStartParameters(Player_X* px, Player_Y* py);
-	bool isValidMove(Player_X* px, Player_Y* py, int c);
 	void getFromX(Player_X* px, int x1, int y1);
 	void getFromY(Player_Y* py, int x1, int y1);
 	bool checkIfComplete();
