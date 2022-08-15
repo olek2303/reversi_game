@@ -57,7 +57,6 @@ int main(int argc, char* argv[]) {
 	b->showDesk();
 
 	while (b->checkIfComplete() != 1) {
-		
 		if (counter % 2 == 0) {
 			b->getFromX(px, x, y);
 		}

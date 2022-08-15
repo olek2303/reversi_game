@@ -21,7 +21,6 @@ void Base::infoGame() {
 }
 
 void Base::showDesk() {
-	cout << "DDDD" << endl;
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
 			printf("%3c", tab[i][j]);
@@ -129,89 +128,175 @@ void Base::getFromY(Player_Y* py, int x2, int y2) {
 		//5. sprawdz skosy TB
 
 		//sprawdzam skos prawa gora TB
-		for (int i = y2; i < 8; i++) {
-			if (tab[x2][i] == 'Y') {
-				int k = x2 - 1;
-				for (int j = y2 + 1; j < i; j++) {
-					if (tab[k][j] == '.') {//sytuacja ze jest puste miedzy polami
+		for (int i = x2; i > -1; i--) { // prawy dol
+			int j = y2;
+			if (tab[i][j] == 'Y' || tab[i][j] == 'X') {
+				for (int k = x2 -1; k > i; k--) {
+					int l = y2 + 1;
+					if (tab[k][l] == '.') {
 						check = 0;
 						break;
 					}
-					if (tab[k][j] == 'X') {
+					if (tab[k][l] = 'X') {
 						tab[x2][y2] = 'Y';
-						tab[k][j] = 'Y';
+						tab[k][l] = 'Y';
 						check = 1;
 					}
-					k--;
+					l++;
 				}
 				if (check == 1)
 					break;
 			}
+			j++;
 		}
 
 		//sprawdzam skos lewa gora TB
-		for (int i = y2; i > -1; i--) {
-			if (tab[x2][i] == 'Y') {
-				int k = x2 - 1;
-				for (int j = y2 - 1; j > i; j--) {
-					if (tab[k][j] == '.') {//sytuacja ze jest puste miedzy polami
+		for (int i = x2; i > -1; i--) { // prawy dol
+			int j = y2;
+			if (tab[i][j] == 'Y' || tab[i][j] == 'X') {
+				for (int k = x2-1; k > i; k--) {
+					int l = y2 - 1;
+					if (tab[k][l] == '.') {
 						check = 0;
 						break;
 					}
-					if (tab[k][j] == 'X') {
+					if (tab[k][l] = 'X') {
 						tab[x2][y2] = 'Y';
-						tab[k][j] = 'Y';
+						tab[k][l] = 'Y';
 						check = 1;
 					}
-					k--;
+					l--;
 				}
 				if (check == 1)
 					break;
 			}
-		}
-
-		//sprawdzam skos prawa dol TB
-		for (int i = y2; i < 8; i++) {
-			if (tab[x2][i] == 'Y') {
-				int k = x2 + 1;
-				for (int j = y2 + 1; j < i; j++) {
-					if (tab[k][j] == '.') {//sytuacja ze jest puste miedzy polami
-						check = 0;
-						break;
-					}
-					if (tab[k][j] == 'X') {
-						tab[x2][y2] = 'Y';
-						tab[k][j] = 'Y';
-						check = 1;
-					}
-					k++;
-				}
-				if (check == 1)
-					break;
-			}
+			j--;
 		}
 
 		//sprawdzam skos lewa dol TB
-		for (int i = y2; i > -1; i--) {
-			if (tab[x2][i] == 'Y') {
-				int k = x2 + 1;
-				for (int j = y2 - 1; j > i; j--) {
-					if (tab[k][j] == '.') {//sytuacja ze jest puste miedzy polami
+		for (int i = x2; i < 8; i++) { // prawy dol
+			int j = y2;
+			if (tab[i][j] == 'Y' || tab[i][j] == 'X') {
+				for (int k = x2 + 1; k < i; k++) {
+					int l = y2 - 1;
+					if (tab[k][l] == '.') {
 						check = 0;
 						break;
 					}
-					if (tab[k][j] == 'X') {
+					if (tab[k][l] = 'X') {
 						tab[x2][y2] = 'Y';
-						tab[k][j] = 'Y';
+						tab[k][l] = 'Y';
 						check = 1;
 					}
-					k++;
+					l--;
+				}
+				if (check == 1)
+					break;
+			}
+			j--;
+		}
+
+		//sprawdzam skos prawa dol TB
+		for (int i = x2; i < 8; i++) { // prawy dol
+			int j = y2;
+			if (tab[i][j] == 'Y' || tab[i][j] == 'X') {
+				for (int k = x2 + 1; k < i; k++) {
+					int l = y2 + 1;
+					if (tab[k][l] == '.') {
+						check = 0;
+						break;
+					}
+					if (tab[k][l] = 'X') {
+						tab[x2][y2] = 'Y';
+						tab[k][l] = 'Y';
+						check = 1;
+					}
+					l++;
+				}
+				if (check == 1)
+					break;
+			}
+			j++;
+		}
+	}
+
+	/*
+
+	for (int i = -1; i < 2; i++) {
+		for (int j = -1; j < 2; j++) {
+			if (i == 0 || j == 0) // sprawdzam tylko skosy, inne pomijam
+				continue;
+			if (tab[x2 + i][y2 + j] == 'X' || tab[x2 + i][y2 + j] == 'Y') {
+				cout << "Tutaj mozna wykonac ruch. " << endl;
+				//skoks prawa gora 
+				for (int k = x2 - 1; k > i; k--) {
+					int l = y2 + 1;
+					if (tab[k][l] == '.') {
+						check = 0;
+						break;
+					}
+					if (tab[k][l] = 'X') {
+						tab[x2][y2] = 'Y';
+						tab[k][l] = 'Y';
+						check = 1;
+					}
+					l++;
+				}
+				if (check == 1)
+					break;
+				//skoks lewa gora
+				for (int k = x2 - 1; k > i; k--) {
+					int l = y2 - 1;
+					if (tab[k][l] == '.') {
+						check = 0;
+						break;
+					}
+					if (tab[k][l] = 'X') {
+						tab[x2][y2] = 'Y';
+						tab[k][l] = 'Y';
+						check = 1;
+					}
+					l--;
+				}
+				if (check == 1)
+					break;
+				//skos prawa dol
+				for (int k = x2 + 1; k < i; k++) {
+					int l = y2 + 1;
+					if (tab[k][l] == '.') {
+						check = 0;
+						break;
+					}
+					if (tab[k][l] = 'X') {
+						tab[x2][y2] = 'Y';
+						tab[k][l] = 'Y';
+						check = 1;
+					}
+					l++;
+				}
+				if (check == 1)
+					break;
+				//skos lewa dol
+				for (int k = x2 + 1; k < i; k++) {
+					int l = y2 - 1;
+					if (tab[k][l] == '.') {
+						check = 0;
+						break;
+					}
+					if (tab[k][l] = 'X') {
+						tab[x2][y2] = 'Y';
+						tab[k][l] = 'Y';
+						check = 1;
+					}
+					l--;
 				}
 				if (check == 1)
 					break;
 			}
 		}
 	}
+	*/
+
 	if (check == 0)
 		cout << "RUCH NIEMOZLIWY!!!!" << endl;
 }
@@ -304,19 +389,66 @@ void Base::getFromX(Player_X* px, int x1, int y1) {
 			}
 		}
 
-		//5. skosy TB
+		//5. sprawdz skosy TB
 
 		//sprawdzam skos prawa gora TB
-		for (int i = y1; i > -1; i--) {
-			if (tab[x1][i] == 'X') {
-				for (int j = y1 - 1; j > i; j--) {
-					if (tab[x1][j] == '.') {//sytuacja ze jest puste miedzy polami
+		for (int i = x1; i > -1; i--) { // prawy dol
+			int j = y1;
+			if (tab[i][j] == 'X' || tab[i][j] == 'Y') {
+				for (int k = x1 - 1; k > i; k--) {
+					int l = y1 + 1;
+					if (tab[k][l] == '.') {
 						check = 0;
 						break;
 					}
-					if (tab[x1][j] == 'Y') {
+					if (tab[k][l] = 'Y') {
 						tab[x1][y1] = 'X';
-						tab[x1][j] = 'X';
+						tab[k][l] = 'X';
+						check = 1;
+					}
+					l++;
+				}
+				if (check == 1)
+					break;
+			}
+			j++;
+		}
+
+		//sprawdzam skos lewa gora TB
+		for (int i = x1; i > -1 ; i--) { // prawy dol
+			int j = y1;
+			if (tab[i][j] == 'X' || tab[i][j] == 'Y') {
+				for (int k = x1 - 1; k > i; k--) {
+					int l = y1 - 1;
+					if (tab[k][l] == '.') {
+						check = 0;
+						break;
+					}
+					if (tab[k][l] = 'Y') {
+						tab[x1][y1] = 'X';
+						tab[k][l] = 'X';
+						check = 1;
+					}
+					l--;
+				}
+				if (check == 1)
+					break;
+			}
+			j--;
+		}
+
+		//sprawdzam skos prawa dol TB
+		//idê w stronê prawy górny
+		for (int i = 0; i + y1 < 8 && i + x1 < 8; i++) {
+			if (tab[x1 + i][y1 + i] == 'X') {
+				for (int j = i; j < y1 + i && j < x1 + i; j++) {
+					if (tab[x1 + j][y1 + j] == '.') {//sytuacja ze jest puste miedzy polami
+						check = 0;
+						break;
+					}
+					if (tab[x1 + j][y1 + j] == 'Y') {
+						tab[x1 + j][y1 + j] = 'X';
+						tab[x1 + j][y1 + j] = 'X';
 						check = 1;
 					}
 				}
@@ -325,63 +457,130 @@ void Base::getFromX(Player_X* px, int x1, int y1) {
 			}
 		}
 
-		//sprawdzam skos lewo gora TB
-		for (int i = y1; i > -1; i--) {
-			if (tab[x1][i] == 'X') {
-				for (int j = y1 - 1; j > i; j--) {
-					if (tab[x1][j] == '.') {//sytuacja ze jest puste miedzy polami
+		//sprawdzam skos lewa dol TB
+		for (int i = x1; i < 8; i++) { // prawy dol
+			int j = y1;
+			if (tab[i][j] == 'X' || tab[i][j] == 'Y') {
+				for (int k = x1 + 1; k < i; k++) {
+					int l = y1 - 1;
+					if (tab[k][l] == '.') {
 						check = 0;
 						break;
 					}
-					if (tab[x1][j] == 'Y') {
+					if (tab[k][l] = 'Y') {
 						tab[x1][y1] = 'X';
-						tab[x1][j] = 'X';
+						tab[k][l] = 'X';
 						check = 1;
 					}
+					l--;
 				}
 				if (check == 1)
 					break;
 			}
+			j--;
 		}
+	}
 
-		//sprawdzam skos prawy dol TB
-		for (int i = y1; i > -1; i--) {
-			if (tab[x1][i] == 'X') {
-				for (int j = y1 - 1; j > i; j--) {
-					if (tab[x1][j] == '.') {//sytuacja ze jest puste miedzy polami
+	// SKOSY
+	/*
+	
+	for (int i = -1; i < 2; i++) {
+		for (int j = -1; j < 2; j++) {
+			if (i == 0 || j == 0) // sprawdzam tylko skosy, inne pomijam
+				continue;
+			if (tab[x1 + i][y1 + j] == 'X' || tab[x1 + i][y1 + j] == 'Y') {
+				cout << "Tutaj mozna wykonac ruch. " << endl;
+				//skoks prawa gora 
+				for (int k = x1 - 1; k > i; k--) {
+					int l = y1 + 1;
+					if (tab[k][l] == '.') {
 						check = 0;
 						break;
 					}
-					if (tab[x1][j] == 'Y') {
+					if (tab[k][l] = 'Y') {
 						tab[x1][y1] = 'X';
-						tab[x1][j] = 'X';
+						tab[k][l] = 'X';
 						check = 1;
 					}
+					l++;
 				}
 				if (check == 1)
 					break;
-			}
-		}
-
-		//sprawdzam skos lewy dol TB
-		for (int i = y1; i > -1; i--) {
-			if (tab[x1][i] == 'X') {
-				for (int j = y1 - 1; j > i; j--) {
-					if (tab[x1][j] == '.') {//sytuacja ze jest puste miedzy polami
+				//skoks lewa gora
+				for (int k = x1 - 1; k > i; k--) {
+					int l = y1 - 1;
+					if (tab[k][l] == '.') {
 						check = 0;
 						break;
 					}
-					if (tab[x1][j] == 'Y') {
+					if (tab[k][l] = 'Y') {
 						tab[x1][y1] = 'X';
-						tab[x1][j] = 'X';
+						tab[k][l] = 'X';
 						check = 1;
 					}
+					l--;
+				}
+				if (check == 1)
+					break;
+				//skos prawa dol
+				for (int k = x1 + 1; k < i; k++) {
+					int l = y1 + 1;
+					if (tab[k][l] == '.') {
+						check = 0;
+						break;
+					}
+					if (tab[k][l] = 'Y') {
+						tab[x1][y1] = 'X';
+						tab[k][l] = 'X';
+						check = 1;
+					}
+					l++;
+				}
+				if (check == 1)
+					break;
+				//skos lewa dol
+				for (int k = x1 + 1; k < i; k++) {
+					int l = y1 - 1;
+					if (tab[k][l] == '.') {
+						check = 0;
+						break;
+					}
+					if (tab[k][l] = 'Y') {
+						tab[x1][y1] = 'X';
+						tab[k][l] = 'X';
+						check = 1;
+					}
+					l--;
 				}
 				if (check == 1)
 					break;
 			}
 		}
 	}
+
+	*/
+
+	for (int i = -1; i < 2; i++) {
+		for (int j = -1; j < 2; j++) {
+			if (i == 0 || j == 0)
+				continue;
+			if (tab[x1 + i][y1 + j] == 'X') {
+				int k = x1 + i;
+				int l = y1 + j;
+				while (tab[k][l] != '.' || k < 8 || l < 8) {
+					k++;
+					l++;
+				}
+				for (int a = x1 + i; a > k; a--) {
+					for (int b = y1 + j; b > l; b--) {
+						tab[a][b] = 'Y';
+					}
+				}
+				tab[x1][y1] = 'Y';
+			}
+		}
+	}
+	
 	if (check == 0)
 		cout << "RUCH NIEMOZLIWY!!!!" << endl;
 }
@@ -403,7 +602,7 @@ bool Base::checkIfComplete() {
 				return 0;
 			}
 			else { return 1; }
-		}
+		} 
 	}
 	return 1;
 }
