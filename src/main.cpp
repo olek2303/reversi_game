@@ -1,7 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-#include <stdlib.h>
-#include <string.h>
 #include <cstring>
 #include <cstdlib>
 #include <cstdio>
@@ -20,6 +18,8 @@ int main(int argc, char* argv[]) {
 	int counter = 0;
 	int x = 0;
 	int y = 0;
+	bool playerX = 0;
+	bool playerY = 0;
 
 	Player_X* px = new Player_X();
 	Player_Y* py = new Player_Y();
@@ -57,12 +57,14 @@ int main(int argc, char* argv[]) {
 	b->showDesk();
 
 	while (b->checkIfComplete() != 1) {
-		if (counter % 2 == 0) {
-			b->getFromX(px, x, y);
+		while(playerX != 1) {
+			playerX = b->getFromX(px, x, y);
 		}
-		else {
-			b->getFromY(py, x, y);
+		playerX = 0;
+		while(playerY != 1) {
+			playerY = b->getFromY(py, x, y);
 		}
+		playerY = 0;
 		b->showDesk();
 		b->checkIfComplete();
 		//system("cls");
