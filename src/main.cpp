@@ -28,8 +28,8 @@ int main(int argc, char* argv[]) {
 	Player_Y_1p py1;
 
 	cout << "--------- REVERSI GAME C++ ---------" << endl << endl;
-
-
+	b->infoGame();
+	cout << "WYBIERZ JEDNA Z 3 OPCJI: " << endl;
 	cout << "1. gra dla dwoch osob" << endl;
 	cout << "2. gra dla jednej osoby" << endl;
 	cout << "3. wyjscie" << endl;
@@ -52,7 +52,7 @@ int main(int argc, char* argv[]) {
 		cout << "Koncze gre." << endl;
 		return 0;
 	}
-	
+
 	b->setStartParameters(px, py);
 	b->showDesk();
 

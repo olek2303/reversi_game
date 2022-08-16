@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Base::Base() {
+Base::Base() { //konstruktor wypelnia plansze kropkami
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
 			tab[i][j] = '.';
@@ -12,16 +12,24 @@ Base::Base() {
 	}
 }
 
-void Base::infoGame() {
-	cout << "GAME RULES: " << endl;
-	cout << "1. We have 8x8 board, where we can see two X and two Y in the middle of the board." << endl;
-	cout << "2. " << endl;
-	cout << "3. " << endl;
-	cout << "4. " << endl;
+void Base::infoGame() { //informacje o grze, zasady
+	cout << "Zasady gry: " << endl;
+	cout << "Gra rozgrywa siê na planszy 8x8." << endl;
+	cout << "Pionki w pozycji startowej ustawione sa po srodku planszy w pozycji XY oraz linijke nizej YX." << endl;
+	cout << "Ukladane sa pionki X lub Y na przemian przez graczy do zapelnienia calej planszy, lub braku pionkow ktoregos z graczy." << endl;
+	cout << "Dozwolony ruch jest wtedy, gdy gracz mo¿e przejac pionka przeciwnego gracza." << endl;
+	cout << "Pionki mozna przejmowac w pionie, poziomie, oraz ukosnie." << endl;
+	cout << endl;
 }
 
-void Base::showDesk() {
+void Base::showDesk() { //wyswietlanie aktualnego stanu gry
+	printf("%c", ' ');
 	for (int i = 0; i < 8; i++) {
+		printf("%3d", i);
+	}
+	cout << endl;
+	for (int i = 0; i < 8; i++) {
+		cout << i ;
 		for (int j = 0; j < 8; j++) {
 			printf("%3c", tab[i][j]);
 		}
@@ -29,7 +37,7 @@ void Base::showDesk() {
 	}
 }
 
-void Base::setStartParameters(Player_X* px, Player_Y* py) {
+void Base::setStartParameters(Player_X* px, Player_Y* py) { //ustawienie poczatkowych parametrow do rozpoczecia gry
 	tab[3][3] = 'X';
 	tab[4][4] = 'X';
 	tab[3][4] = 'Y';
