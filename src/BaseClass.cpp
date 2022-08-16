@@ -47,7 +47,7 @@ void Base::setStartParameters(Player_X* px, Player_Y* py) { //ustawienie poczatk
 
 bool Base::getFromX(Player_X* px, int x1, int y1) {
 	bool check = 0;
-	bool checkAll = 0;
+	bool checkAll = 1;
 	x1 = px->setX();
 	y1 = px->setY();
 	//1. sprawdz czy podane wspolrzedne sa w przedziale [0,7]
@@ -217,7 +217,7 @@ bool Base::getFromX(Player_X* px, int x1, int y1) {
 
 bool Base::getFromY(Player_Y* py, int x2, int y2) {
 	bool check = 0;
-	bool checkAll = 0;
+	bool checkAll = 1;
 	x2 = py->setX();
 	y2 = py->setY();
 	//1. sprawdz czy podane wspolrzedne sa w przedziale [0,7]
@@ -389,25 +389,42 @@ bool Base::getFromY(Player_Y* py, int x2, int y2) {
 }
 
 bool Base::checkIfComplete() {
-	for (int i = 0; i < 8; i++) {
-		for (int j = 0; j < 8; j++) {
-			if (tab[i][j] == '.')
-				return 0;
-		}
-	}
+	bool x = 0;
+	bool y = 0;
 	bool f = 0;
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
 			if (tab[i][j] == 'X') {
-				f = 1;
+				x = 1;
 			}
-			if (f == 1 && tab[i][j] == 'Y') {
-				return 0;
+			if (tab[i][j] == 'Y') {
+				y = 1;
 			}
-			else { return 1; }
 		} 
 	}
-	return 1;
+
+	if (x == 1 && y == 1) { //gra sie nie konczy
+		return 0;
+	}
+
+	if (x == 0 && y == 1) { //wygral Y
+		return 1;
+	}
+
+	if (x == 1 && y == 0) { //wygral X
+		return 1;
+	}
+
+	for (int i = 0; i < 8; i++) { //czy plansza jest zapelniona
+		for (int j = 0; j < 8; j++) {
+			if (tab[i][j] == '.')
+				f = 0;
+		}
+	}
+
+	cout << "Koniec gry" << endl;
+ 
+	return f;
 }
 
 int Base::countX(){
