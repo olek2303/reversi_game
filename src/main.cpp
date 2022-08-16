@@ -56,19 +56,20 @@ int main(int argc, char* argv[]) {
 	b->setStartParameters(px, py);
 	b->showDesk();
 
-	while (b->checkIfComplete() != 1) {
+	bool endGame = 0;
+	while (endGame != 1) {
 		while(playerX != 1) {
 			playerX = b->getFromX(px, x, y);
 		}
 		playerX = 0;
 		b->showDesk();
-		b->checkIfComplete();
+		endGame = b->checkIfComplete();
 		while(playerY != 1) {
 			playerY = b->getFromY(py, x, y);
 		}
 		playerY = 0;
 		b->showDesk();
-		b->checkIfComplete();
+		endGame = b->checkIfComplete();
 		//system("cls");
 
 		counter++;
