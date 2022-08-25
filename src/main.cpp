@@ -52,7 +52,7 @@ int main(int argc, char* argv[]) {
 		cout << "Koncze gre." << endl;
 		return 0;
 	}
-
+	system("cls");
 	b->setStartParameters(px, py);
 	b->showDesk();
 
@@ -62,15 +62,16 @@ int main(int argc, char* argv[]) {
 			playerX = b->getFromX(px, x, y);
 		}
 		playerX = 0;
+		//system("cls");
 		b->showDesk();
 		endGame = b->checkIfComplete();
 		while(playerY != 1) {
 			playerY = b->getFromY(py, x, y);
 		}
 		playerY = 0;
+		//system("cls");
 		b->showDesk();
 		endGame = b->checkIfComplete();
-		//system("cls");
 
 		counter++;
 	}
