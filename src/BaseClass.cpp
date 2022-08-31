@@ -55,182 +55,219 @@ bool Base::getFromX(Player_X* px, int x1, int y1) {
 	if (tab[x1][y1] != '.')
 		check = checkAll = 0;
 	else {
-		//3. sprawdz pion
-		//sprawdzam pion w dó³
-		for (int i = x1 + 1; i < 8; i++) {
-			if (tab[i][y1] == 'X') {
-				for (int j = x1 + 1; j < i; j++) {
-					if (tab[j][y1] == '.') {//sytuacja ze jest puste miedzy polami
-						check = 0;
-						break;
-					}
-					if (tab[j][y1] == 'Y') {
-						tab[x1][y1] = 'X';
-						tab[j][y1] = 'X';
-						check = checkAll = 1;
-					}
-				}
-				if (check == 1)
+		bool ifpossibleAll = 0;
+		for (int i = -1; i <= 1; i++) {
+			for (int j = -1; j <= 1; j++) {
+				if (tab[x1 + i][y1 + j] == 'Y') {
+					ifpossibleAll = 1;
 					break;
+				}
 			}
 		}
+		if (ifpossibleAll == 1) {
+			bool possible = 0;
+			//3. sprawdz pion
+			//sprawdzam pion w dó³
+			if (tab[x1 + 1][y1] == 'Y') {
+				for (int i = x1 + 1; i < 8; i++) {
+					if (tab[i][y1] == 'X') {
+						possible = 1;
+						break;
+					}
+				}
+				if (possible == 1) {
+					for (int i = x1 + 1; i < 8; i++) {
+						if (tab[i][y1] == '.') {//sytuacja ze jest puste miedzy polami
+							check = 0;
+							break;
+						}
+						if (tab[i][y1] == 'Y') {
+							tab[x1][y1] = 'X';
+							tab[i][y1] = 'X';
+							check = checkAll = 1;
+						}
+					}
+				}
+			}
 
-		//sprawdzam pion w górê
-		for (int i = x1 - 1; i > -1; i--) {
-			if (tab[i][y1] == 'X') {
-				for (int j = x1 - 1; j > i; j--) {
-					if (tab[j][y1] == '.') {//sytuacja ze jest puste miedzy polami
-						check = 0;
+			possible = 0;
+			//sprawdzam pion w górê
+			if (tab[x1 - 1][y1] == 'Y') {
+				for (int i = x1 - 1; i > -1; i--) {
+					if (tab[i][y1] == 'X') {
+						possible = 1;
 						break;
 					}
-					if (tab[j][y1] == 'Y') {
-						tab[x1][y1] = 'X';
-						tab[j][y1] = 'X';
-						check = checkAll = 1;
+				}
+				if (possible == 1) {
+					for (int i = x1 - 1; i > -1; i--) {
+						if (tab[i][y1] == '.') {//sytuacja ze jest puste miedzy polami
+							check = 0;
+							break;
+						}
+						if (tab[i][y1] == 'Y') {
+							tab[x1][y1] = 'X';
+							tab[i][y1] = 'X';
+							check = checkAll = 1;
+						}
 					}
 				}
-				if (check == 1)
-					break;
 			}
-		}
 
-		//4. sprawdz poziom
-		//sprawdzam poziom w prawo
-		for (int i = y1 + 1; i < 8; i++) {
-			if (tab[x1][i] == 'X') {
-				for (int j = y1 + 1; j < i; j++) {
-					if (tab[x1][j] == '.') {//sytuacja ze jest puste miedzy polami
-						check = 0;
+			possible = 0;
+			//4. sprawdz poziom
+			//sprawdzam poziom w prawo
+			if (tab[x1][y1 + 1] == 'Y') {
+				for (int i = y1 + 1; i < 8; i++) {
+					if (tab[x1][i] == 'X') {
+						possible = 1;
 						break;
 					}
-					if (tab[x1][j] == 'Y') {
-						tab[x1][y1] = 'X';
-						tab[x1][j] = 'X';
-						check = checkAll = 1;
+				}
+				if (possible == 1) {
+					for (int i = y1 + 1; i < 8; i++) {
+						if (tab[x1][i] == '.') {//sytuacja ze jest puste miedzy polami
+							check = 0;
+							break;
+						}
+						if (tab[x1][i] == 'Y') {
+							tab[x1][y1] = 'X';
+							tab[x1][i] = 'X';
+							check = checkAll = 1;
+						}
 					}
 				}
-				if (check == 1)
-					break;
 			}
-		}
 
-		//sprawdzam poziom w lewo
-		for (int i = y1 - 1; i > -1; i--) {
-			if (tab[x1][i] == 'X') {
-				for (int j = y1 - 1; j > i; j--) {
-					if (tab[x1][j] == '.') {//sytuacja ze jest puste miedzy polami
-						check = 0;
+			possible = 0;
+			//sprawdzam poziom w lewo
+			if (tab[x1][y1 - 1] == 'Y') {
+				for (int i = y1 - 1; i > -1; i--) {
+					if (tab[x1][i] == 'X') {
+						possible = 1;
 						break;
 					}
-					if (tab[x1][j] == 'Y') {
-						tab[x1][y1] = 'X';
-						tab[x1][j] = 'X';
-						check = checkAll = 1;
+				}
+				if (possible == 1) {
+					for (int i = y1 - 1; i > -1; i--) {
+						if (tab[x1][i] == '.') {//sytuacja ze jest puste miedzy polami
+							check = 0;
+							break;
+						}
+						if (tab[x1][i] == 'Y') {
+							tab[x1][y1] = 'X';
+							tab[x1][i] = 'X';
+							check = checkAll = 1;
+						}
 					}
 				}
-				if (check == 1)
-					break;
 			}
-		}
 
-		//5.sprawdzam skosy
-		bool possible = 0;
-		//idê w stronê prawy dolny
-		if (tab[x1 + 1][y1 + 1] == 'Y') {
-			for (int i = 1; i <= y1 + 1 && i <= x1 + 1; i++) {
-				if (tab[x1 + i][y1 + i] == 'X') {
-					possible = 1;
-					break;
-				}
-			}
-			if (possible == 1) {
-				for (int i = 1; i <= y1 + 1 && i <= x1 + 1; i++) {
-					if (tab[x1 + 1 + i][y1 + 1 + i] == '.') {
-						check = 0;
+
+			//5.sprawdzam skosy
+			possible = 0;
+			//idê w stronê prawy dolny
+			if (tab[x1 + 1][y1 + 1] == 'Y') {
+				for (int i = 0; i <= y1 + 1 && i <= x1 + 1; i++) {
+					if (tab[x1 + 1 + i][y1 + 1 + i] == 'X') {
+						possible = 1;
 						break;
 					}
-					if (tab[x1 + i][y1 + i] == 'Y') {
-						tab[x1 + i][y1 + i] = 'X';
-						tab[x1][y1] = 'X';
-						check = checkAll = 1;
+				}
+				if (possible == 1) {
+					for (int i = 0; i <= y1 + 1 && i <= x1 + 1; i++) {
+						if (tab[x1 + 1 + i][y1 + 1 + i] == '.') {
+							check = 0;
+							break;
+						}
+						if (tab[x1 + i][y1 + i] == 'Y') {
+							tab[x1 + i][y1 + i] = 'X';
+							tab[x1][y1] = 'X';
+							check = checkAll = 1;
+						}
 					}
 				}
 			}
-		}
-		possible = 0;
-		//idê w stronê prawy górny
-		if (tab[x1 - 1][y1 + 1] == 'Y') {
-			for (int i = 1; i <= y1 + 1 && 7 - i >= x1 - 1; i++) {
-				if (tab[x1 - i][y1 + i] == 'X') {
-					possible = 1;
-					break;
-				}
-			}
-			if (possible == 1) {
-				for (int i = 1; i <= y1 + 1 && 7 - i >= x1 - 1; i++) {
-					if (tab[x1 - 1 - i][y1 + 1 + i] == '.') {
-						check = 0;
+			possible = 0;
+			//idê w stronê prawy górny
+			if (tab[x1 - 1][y1 + 1] == 'Y') {
+				for (int i = 0; i <= y1 + 1 && 7 - i >= x1 - 1; i++) {
+					if (tab[x1 - 1 - i][y1 + 1 + i] == 'X') {
+						possible = 1;
 						break;
 					}
-					if (tab[x1 - i][y1 + i] == 'Y') {
-						tab[x1 - i][y1 + i] = 'X';
-						tab[x1][y1] = 'X';
-						check = checkAll = 1;
+				}
+				if (possible == 1) {
+					for (int i = 0; i <= y1 + 1 && 7 - i >= x1 - 1; i++) {
+						if (tab[x1 - 1 - i][y1 + 1 + i] == '.') {
+							check = 0;
+							break;
+						}
+						if (tab[x1 - i][y1 + i] == 'Y') {
+							tab[x1 - i][y1 + i] = 'X';
+							tab[x1][y1] = 'X';
+							check = checkAll = 1;
+						}
 					}
 				}
 			}
-		}
-		possible = 0;
-		//idê w stronê lewy dolny
-		if (tab[x1 + 1][y1 - 1] == 'Y') {
-			for (int i = 1; 7 - i >= y1 - i && i <= x1 + i; i++) {
-				if (tab[x1 + i][y1 - i] == 'X') {
-					possible = 1;
-					break;
-				}
-			}
-			if (possible == 1) {
-				for (int i = 1; 7 - i >= y1 - i && i <= x1 + i; i++) {
-					if (tab[x1 + 1 + i][y1 - 1 - i] == '.') {
-						check = 0;
+			possible = 0;
+			//idê w stronê lewy dolny
+			if (tab[x1 + 1][y1 - 1] == 'Y') {
+				for (int i = 0; 7 - i >= y1 - i && i <= x1 + i; i++) {
+					if (tab[x1 + 1 + i][y1 - 1 - i] == 'X') {
+						possible = 1;
 						break;
 					}
-					if (tab[x1 + i][y1 - i] == 'Y') {
-						tab[x1 + i][y1 - i] = 'X';
-						tab[x1][y1] = 'X';
-						check = checkAll = 1;
+				}
+				if (possible == 1) {
+					for (int i = 0; 7 - i >= y1 - i && i <= x1 + i; i++) {
+						if (tab[x1 + 1 + i][y1 - 1 - i] == '.') {
+							check = 0;
+							break;
+						}
+						if (tab[x1 + i][y1 - i] == 'Y') {
+							tab[x1 + i][y1 - i] = 'X';
+							tab[x1][y1] = 'X';
+							check = checkAll = 1;
+						}
 					}
 				}
 			}
-		}
-		possible = 0;
-		//idê w stronê lewy górny
-		if (tab[x1 - 1][y1 - 1] == 'Y') {
-			for (int i = 1; 7 - i >= y1 - 1 && 7 - i >= x1 - 1; i++) {
-				if (tab[x1 - i][y1 - i] == 'X') {
-					possible = 1;
-					break;
-				}
-			}
-			if (possible == 1) {
-				for (int i = 1; 7 - i >= y1 - 1 && 7 - i >= x1 - 1; i++) {
-					if (tab[x1 - 1 - i][y1 - 1 - i] == '.') {
-						check = 0;
+			possible = 0;
+			//idê w stronê lewy górny
+			if (tab[x1 - 1][y1 - 1] == 'Y') {
+				for (int i = 0; 7 - i >= y1 - 1 && 7 - i >= x1 - 1; i++) {
+					if (tab[x1 - 1 - i][y1 - 1 - i] == 'X') {
+						possible = 1;
 						break;
 					}
-					if (tab[x1 - i][y1 - i] == 'Y') {
-						tab[x1 - i][y1 - i] = 'X';
-						tab[x1][y1] = 'X';
-						check = checkAll = 1;
+				}
+				if (possible == 1) {
+					for (int i = 0; 7 - i >= y1 - 1 && 7 - i >= x1 - 1; i++) {
+						if (tab[x1 - 1 - i][y1 - 1 - i] == '.') {
+							check = 0;
+							break;
+						}
+						if (tab[x1 - i][y1 - i] == 'Y') {
+							tab[x1 - i][y1 - i] = 'X';
+							tab[x1][y1] = 'X';
+							check = checkAll = 1;
+						}
 					}
 				}
 			}
+			if (checkAll == 0) {
+				cout << "RUCH NIEMOZLIWY!!!!" << endl;
+			}
 		}
-	}
+		else {
+			cout << "Ruch jest nie mozliwy w zadnym wypadku. Tracisz kolejke." << endl;
+			return 1;
+		}
+	} 
 	
-	if (checkAll == 0) {
-		cout << "RUCH NIEMOZLIWY!!!!" << endl;
-	}
+
 	return checkAll;
 }
 
@@ -244,183 +281,218 @@ bool Base::getFromY(Player_Y* py, int x2, int y2) {
 	if (tab[x2][y2] != '.')
 		check = checkAll = 0;
 	else {
-		//3. sprawdz pion
-		//sprawdzam pion w dó³
-		for (int i = x2 + 1; i < 8; i++) {
-			if (tab[i][y2] == 'Y') {
-				for (int j = x2 + 1; j < i; j++) {
-					if (tab[j][y2] == '.') {//sytuacja ze jest puste miedzy polami
-						check = 0;
-						break;
-					}
-					if (tab[j][y2] == 'X') {
-						tab[x2][y2] = 'Y';
-						tab[j][y2] = 'Y';
-						check = checkAll = 1;
-					}
-				}
-				if (check == 1)
+		bool ifpossibleAll = 0;
+		for (int i = -1; i <= 1; i++) {
+			for (int j = -1; j <= 1; j++) {
+				if (tab[x2 + i][y2 + j] == 'X') {
+					ifpossibleAll = 1;
 					break;
+				}
 			}
 		}
+		if (ifpossibleAll == 1) {
+			bool possible = 0;
+			//3. sprawdz pion
+			//sprawdzam pion w dó³
+			if (tab[x2 + 1][y2] == 'X') {
+				for (int i = x2 + 1; i < 8; i++) {
+					if (tab[i][y2] == 'Y') {
+						possible = 1;
+						break;
+					}
+				}
+				if (possible == 1) {
+					for (int i = x2 + 1; i < 8; i++) {
+						if (tab[i][y2] == '.') {//sytuacja ze jest puste miedzy polami
+							check = 0;
+							break;
+						}
+						if (tab[i][y2] == 'X') {
+							tab[x2][y2] = 'Y';
+							tab[i][y2] = 'Y';
+							check = checkAll = 1;
+						}
+					}
+				}
+			}
 
-		//sprawdzam pion w górê
-		for (int i = x2 - 1; i > -1; i--) {
-			if (tab[i][y2] == 'Y') {
-				for (int j = x2 - 1; j > i; j--) {
-					if (tab[j][y2] == '.') {//sytuacja ze jest puste miedzy polami
-						check = 0;
+			possible = 0;
+			//sprawdzam pion w górê
+			if (tab[x2 - 1][y2] == 'X') {
+				for (int i = x2 - 1; i > -1; i--) {
+					if (tab[i][y2] == 'Y') {
+						possible = 1;
 						break;
 					}
-					if (tab[j][y2] == 'X') {
-						tab[x2][y2] = 'Y';
-						tab[j][y2] = 'Y';
-						check = checkAll = 1;
+				}
+				if (possible == 1) {
+					for (int i = x2 - 1; i > -1; i--) {
+						if (tab[i][y2] == '.') {//sytuacja ze jest puste miedzy polami
+							check = 0;
+							break;
+						}
+						if (tab[i][y2] == 'X') {
+							tab[x2][y2] = 'Y';
+							tab[i][y2] = 'Y';
+							check = checkAll = 1;
+						}
 					}
 				}
-				if (check == 1)
-					break;
 			}
-		}
 
-		//4. sprawdz poziom
-		//sprawdzam poziom w prawo
-		for (int i = y2 + 1; i < 8; i++) {
-			if (tab[x2][i] == 'Y') {
-				for (int j = y2 + 1; j < i; j++) {
-					if (tab[x2][j] == '.') {//sytuacja ze jest puste miedzy polami
-						check = 0;
+			//4. sprawdz poziom
+			possible = 0;
+			//sprawdzam poziom w prawo
+			if (tab[x2][y2 + 1] == 'X') {
+				for (int i = y2 + 1; i < 8; i++) {
+					if (tab[x2][i] == 'Y') {
+						possible = 1;
 						break;
 					}
-					if (tab[x2][j] == 'X') {
-						tab[x2][y2] = 'Y';
-						tab[x2][j] = 'Y';
-						check = checkAll = 1;
+				}
+				if (possible == 1) {
+					for (int i = y2 + 1; i < 8; i++) {
+						if (tab[x2][i] == '.') {//sytuacja ze jest puste miedzy polami
+							check = 0;
+							break;
+						}
+						if (tab[x2][i] == 'X') {
+							tab[x2][y2] = 'Y';
+							tab[x2][i] = 'Y';
+							check = checkAll = 1;
+						}
 					}
 				}
-				if (check == 1)
-					break;
 			}
-		}
 
-		//sprawdzam poziom w lewo
-		for (int i = y2 - 1; i > -1; i--) {
-			if (tab[x2][i] == 'Y') {
-				for (int j = y2 - 1; j > i; j--) {
-					if (tab[x2][j] == '.') {//sytuacja ze jest puste miedzy polami
-						check = 0;
+			possible = 0;
+			//sprawdzam poziom w lewo
+			if (tab[x2][y2 - 1] == 'X') {
+				for (int i = y2 - 1; i > -1; i--) {
+					if (tab[x2][i] == 'Y') {
+						possible = 1;
 						break;
 					}
-					if (tab[x2][j] == 'X') {
-						tab[x2][y2] = 'Y';
-						tab[x2][j] = 'Y';
-						check = checkAll = 1;
+				}
+				if (possible == 1) {
+					for (int i = y2 - 1; i > -1; i--) {
+						if (tab[x2][i] == '.') {//sytuacja ze jest puste miedzy polami
+							check = 0;
+							break;
+						}
+						if (tab[x2][i] == 'X') {
+							tab[x2][y2] = 'Y';
+							tab[x2][i] = 'Y';
+							check = checkAll = 1;
+						}
 					}
 				}
-				if (check == 1)
-					break;
 			}
-		}
 
-		//5.sprawdzam skosy
-		bool possible = 0;
-		//idê w stronê prawy dolny
-		if (tab[x2 + 1][y2 + 1] == 'X') {
-			for (int i = 1; i <= y2 + 1 && i <= x2 + 1; i++) {
-				if (tab[x2 + i][y2 + i] == 'Y') {
-					possible = 1;
-					break;
-				}
-			}
-			if (possible == 1) {
-				for (int i = 1; i <= y2 + 1 && i <= x2 + 1; i++) {
-					if (tab[x2 + 1 + i][y2 + 1 + i] == '.') {
-						check = 0;
+			//5.sprawdzam skosy
+			possible = 0;
+			//idê w stronê prawy dolny
+			if (tab[x2 + 1][y2 + 1] == 'X') {
+				for (int i = 0; i <= y2 + 1 && i <= x2 + 1; i++) {
+					if (tab[x2 + 1 + i][y2 + 1 + i] == 'Y') {
+						possible = 1;
 						break;
 					}
-					if (tab[x2 + i][y2 + i] == 'X') {
-						tab[x2 + i][y2 + i] = 'Y';
-						tab[x2][y2] = 'Y';
-						check = checkAll = 1;
+				}
+				if (possible == 1) {
+					for (int i = 0; i <= y2 + 1 && i <= x2 + 1; i++) {
+						if (tab[x2 + 1 + i][y2 + 1 + i] == '.') {
+							check = 0;
+							break;
+						}
+						if (tab[x2 + i][y2 + i] == 'X') {
+							tab[x2 + i][y2 + i] = 'Y';
+							tab[x2][y2] = 'Y';
+							check = checkAll = 1;
+						}
 					}
 				}
 			}
+
+			possible = 0;
+			//idê w stronê prawy górny
+			if (tab[x2 - 1][y2 + 1] == 'X') {
+				for (int i = 0; i <= y2 + 1 && 7 - i >= x2 - 1; i++) {
+					if (tab[x2 - 1 - i][y2 + 1 + i] == 'Y') {
+						possible = 1;
+						break;
+					}
+				}
+				if (possible == 1) {
+					for (int i = 0; i <= y2 + 1 && 7 - i >= x2 - 1; i++) {
+						if (tab[x2 - 1 - i][y2 + 1 + i] == '.') {
+							check = 0;
+							break;
+						}
+						if (tab[x2 - i][y2 + i] == 'X') {
+							tab[x2 - i][y2 + i] = 'Y';
+							tab[x2][y2] = 'Y';
+							check = checkAll = 1;
+						}
+					}
+				}
+			}
+			possible = 0;
+			//idê w stronê lewy dolny
+			if (tab[x2 + 1][y2 - 1] == 'X') {
+				for (int i = 0; 7 - i >= y2 - 1 && i <= x2 + 1; i++) {
+					if (tab[x2 + 1 + i][y2 - 1 - i] == 'Y') {
+						possible = 1;
+						break;
+					}
+				}
+				if (possible == 1) {
+					for (int i = 0; 7 - i >= y2 - 1 && i <= x2 + 1; i++) {
+						if (tab[x2 + 1 + i][y2 - 1 - i] == '.') {
+							check = 0;
+							break;
+						}
+						if (tab[x2 + i][y2 - i] == 'X') {
+							tab[x2 + i][y2 - i] = 'Y';
+							tab[x2][y2] = 'Y';
+							check = checkAll = 1;
+						}
+					}
+				}
+			}
+			possible = 0;
+			//idê w stronê lewy górny
+			if (tab[x2 - 1][y2 - 1] == 'X') {
+				for (int i = 0; 7 - i >= y2 - 1 && 7 - i >= x2 - 1; i++) {
+					if (tab[x2 - 1 - i][y2 - 1 - i] == 'Y') {
+						possible = 1;
+						break;
+					}
+				}
+				if (possible == 1) {
+					for (int i = 0; 7 - i >= y2 - 1 && 7 - i >= x2 - 1; i++) {
+						if (tab[x2 - 1 - i][y2 - 1 - i] == '.') {
+							check = 0;
+							break;
+						}
+						if (tab[x2 - i][y2 - i] == 'X') {
+							tab[x2 - i][y2 - i] = 'Y';
+							tab[x2][y2] = 'Y';
+							check = checkAll = 1;
+						}
+					}
+				}
+			}
+			if (checkAll == 0) {
+				cout << "RUCH NIEMOZLIWY!!!!" << endl;
+			}
 		}
+		else {
+			cout << "Ruch jest nie mozliwy w zadnym wypadku. Tracisz kolejke." << endl;
+			return 1;
+		}
+	}
 		
-		possible = 0;
-		//idê w stronê prawy górny
-		if (tab[x2 - 1][y2 + 1] == 'X') {
-			for (int i = 1; i <= y2 + 1 && 7 - i >= x2 - 1; i++) {
-				if (tab[x2 - i][y2 + i] == 'Y') {
-					possible = 1;
-					break;
-				}
-			}
-			if (possible == 1) {
-				for (int i = 1; i <= y2 + 1 && 7 - i >= x2 - 1; i++) {
-					if (tab[x2 - 1 - i][y2 + 1 + i] == '.') {
-						check = 0;
-						break;
-					}
-					if (tab[x2 - i][y2 + i] == 'X') {
-						tab[x2 - i][y2 + i] = 'Y';
-						tab[x2][y2] = 'Y';
-						check = checkAll = 1;
-					}
-				}
-			}
-		}
-		possible = 0;
-		//idê w stronê lewy dolny
-		if (tab[x2 + 1][y2 - 1] == 'X') {
-			for (int i = 1; 7 - i >= y2 - 1 && i <= x2 + 1; i++) {
-				if (tab[x2 + i][y2 - i] == 'Y') {
-					possible = 1;
-					break;
-				}
-			}
-			if (possible == 1) {
-				for (int i = 1; 7 - i >= y2 - 1 && i <= x2 + 1; i++) {
-					if (tab[x2 + 1 + i][y2 - 1 - i] == '.') {
-						check = 0;
-						break;
-					}
-					if (tab[x2 + i][y2 - i] == 'X') {
-						tab[x2 + i][y2 - i] = 'Y';
-						tab[x2][y2] = 'Y';
-						check = checkAll = 1;
-					}
-				}
-			}
-		}
-		possible = 0;
-		//idê w stronê lewy górny
-		if (tab[x2 - 1][y2 - 1] == 'X') {
-			for (int i = 1; 7 - i >= y2 - 1 && 7 - i >= x2 - 1; i++) {
-				if (tab[x2 - i][y2 - i] == 'Y') {
-					possible = 1;
-					break;
-				}
-			}
-			if (possible == 1) {
-				for (int i = 1; 7 - i >= y2 - 1 && 7 - i >= x2 - 1; i++) {
-					if (tab[x2 - 1 - i][y2 - 1 - i] == '.') {
-						check = 0;
-						break;
-					}
-					if (tab[x2 - i][y2 - i] == 'X') {
-						tab[x2 - i][y2 - i] = 'Y';
-						tab[x2][y2] = 'Y';
-						check = checkAll = 1;
-					}
-				}
-			}
-		}
-	}
-
-	if (checkAll == 0) {
-		cout << "RUCH NIEMOZLIWY!!!!" << endl;
-	}
 	return checkAll;
 }
 

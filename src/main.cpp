@@ -65,6 +65,9 @@ int main(int argc, char* argv[]) {
 		system("cls");
 		b->showDesk();
 		endGame = b->checkIfComplete();
+		if (endGame == 1)
+			break;
+
 		while(playerY != 1) {
 			playerY = b->getFromY(py, x, y);
 		}
@@ -72,6 +75,8 @@ int main(int argc, char* argv[]) {
 		system("cls");
 		b->showDesk();
 		endGame = b->checkIfComplete();
+		if (endGame == 1)
+			break;
 
 		counter++;
 	}
