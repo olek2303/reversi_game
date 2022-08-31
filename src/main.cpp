@@ -62,7 +62,7 @@ int main(int argc, char* argv[]) {
 			playerX = b->getFromX(px, x, y);
 		}
 		playerX = 0;
-		system("cls");
+		//system("cls");
 		b->showDesk();
 		endGame = b->checkIfComplete();
 		if (endGame == 1)
@@ -72,7 +72,7 @@ int main(int argc, char* argv[]) {
 			playerY = b->getFromY(py, x, y);
 		}
 		playerY = 0;
-		system("cls");
+		//system("cls");
 		b->showDesk();
 		endGame = b->checkIfComplete();
 		if (endGame == 1)
