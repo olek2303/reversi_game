@@ -103,19 +103,45 @@ int main(int argc, char* argv[]) {
 	}
 	int counter_X = b->countX();
 	int counter_Y = b->countY();
+	int winOrLoseX = 0, winOrLoseY = 0;
 	if (counter_X > counter_Y) {
 		cout << "Wygral gracz X!!!   Ilosc punktow: " << counter_X << endl;
+		winOrLoseX = 1;
+		winOrLoseY = 0;
 	}
 	else if (counter_X < counter_Y) {
 		cout << "Wygral gracz Y!!!   Ilosc punktow: " << counter_Y << endl;
+		winOrLoseX = 0;
+		winOrLoseY = 1;
 	}
 	else {
 		cout << "Remis :O" << endl;
+		winOrLoseX = winOrLoseY = 2;
 	}
-	f1->addToFile(counter_X);
-	f2->addToFile(counter_Y);
-	cout << "Koniec gry." << endl;
+	f1->addToFile(counter_X, winOrLoseX);
+	f2->addToFile(counter_Y, winOrLoseY);
+
+	int wyb = 1;
+	while (wyb != 0) {
+		cout << "Czy chcesz wyswietlic statystyki jakiegos gracza? (1 - tak, 0 - nie)" << endl;
+		while (scanf("%d", &wyb) != 1 || getchar() != '\n' || wyb < 0 || wyb > 1) {
+			while (getchar() != '\n')
+				;
+		}
+		if (wyb == 1) {
+			char nazwa[30] = { '\0' };
+			cout << "Podaj nick gracza ktorego statystyki chcesz odczytac: " << endl;
+			while (scanf("%s", nazwa) != 1 || getchar() != '\n') {
+				while (getchar() != '\n')
+					;
+			}
+			File* stat = new File();
+			stat->readFile(nazwa);
+		}
+	}
 	
+
+	cout << "Koniec gry." << endl;
 
 	return 0;
 } 
