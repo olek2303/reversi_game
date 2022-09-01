@@ -3,28 +3,25 @@
 #include <cstring>
 #include <cstdlib>
 #include <cstdio>
-#include "Functions.hpp"
-#include "Player_X.hpp"
 #include "Player_Y.hpp"
 #include "Player_Y-1p.hpp"
-#include "Player_Y-2p.hpp"
 #include "Player_Y_abstr.hpp"
 #include "BaseClass.hpp"
+#include "File.hpp"
 
 using namespace std;
 
 int main(int argc, char* argv[]) {
 	int start = 1;
-	int counter = 0;
+	int counter = 2;
 	int x = 0;
 	int y = 0;
 	bool playerX = 0;
 	bool playerY = 0;
 
-	Player_X* px = new Player_X();
+	Player_Y* px = new Player_Y();
 	Player_Y* py = new Player_Y();
 	Base* b = new Base();
-	Player_Y_2p py2;
 	Player_Y_1p py1;
 
 	cout << "--------- REVERSI GAME C++ ---------" << endl << endl;
@@ -42,7 +39,6 @@ int main(int argc, char* argv[]) {
 
 	switch (start) {
 	case 1:
-		py = &py2;
 		break;
 	case 2:
 		py = &py1;
@@ -58,9 +54,12 @@ int main(int argc, char* argv[]) {
 
 	bool endGame = 0;
 	while (endGame != 1) {
-		while(playerX != 1) {
-			playerX = b->getFromX(px, x, y);
+		if (counter % 2 == 0) {
+			while (playerX != 1) {
+				playerX = b->getFrom(px, x, y, 'X', 'Y', 0);
+			}
 		}
+		counter++;
 		playerX = 0;
 		//system("cls");
 		b->showDesk();
@@ -68,14 +67,16 @@ int main(int argc, char* argv[]) {
 		if (endGame == 1)
 			break;
 		int c = 0;
-		while(playerY != 1) {
-			playerY = b->getFromY(py, x, y);
-			c++;
-			if (c == 2) {
-				py->setX1(-1);
-				py->setY1(-1);
-				cout << "Nie ma mozliwosci ruchu" << endl;
-				break;
+		if (counter % 2 != 0) {
+			while (playerY != 1) {
+				playerY = b->getFrom(py, x, y, 'Y', 'X', 1);
+				c++;
+				if (c == 2) {
+					py->setX1(-1);
+					py->setY1(-1);
+					cout << "Nie ma mozliwosci ruchu" << endl;
+					break;
+				}
 			}
 		}
 		c = 0;

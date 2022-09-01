@@ -11,8 +11,7 @@ Player_Y::Player_Y() {
 
 int Player_Y::setX() {
 	int x_p;
-	cout << "Podaj wartosc x na ktorej pozycji ustawic gracza Y: ";
-	while (scanf("%d", &x_p) != 1 || x_p < 0 || x_p > 7 || getchar() != '\n') {
+	while (scanf("%d", &x_p) != 1 || x_p < -1 || x_p > 7 || getchar() != '\n') {
 		cout << "Bledne dane. Popraw:";
 		while (getchar() != '\n')
 			;
@@ -22,8 +21,7 @@ int Player_Y::setX() {
 }
 int Player_Y::setY() {
 	int y_p;
-	cout << "Podaj wartosc y na ktorej pozycji ustawic gracza Y: ";
-	while (scanf("%d", &y_p) != 1 || y_p < 0 || y_p > 7 || getchar() != '\n') {
+	while (scanf("%d", &y_p) != 1 || y_p < -1 || y_p > 7 || getchar() != '\n') {
 		cout << "Bledne dane. Popraw:";
 		while (getchar() != '\n')
 			;
