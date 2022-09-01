@@ -23,6 +23,9 @@ int main(int argc, char* argv[]) {
 	Player_Y* py = new Player_Y();
 	Base* b = new Base();
 	Player_Y_1p py1;
+	File* f1 = new File();
+	File* f2 = new File();
+	char n1[20] = { '\0' };
 
 	cout << "--------- REVERSI GAME C++ ---------" << endl << endl;
 	b->infoGame();
@@ -39,8 +42,17 @@ int main(int argc, char* argv[]) {
 
 	switch (start) {
 	case 1:
+		cout << "Nick gracza pierwszego: ";
+		cin >> n1;
+		f1->setNazwa(n1);
+		cout << "Nick gracza drugiego: ";
+		cin >> n1;
+		f2->setNazwa(n1);
 		break;
 	case 2:
+		cout << "Nick gracza: ";
+		cin >> n1;
+		f1->setNazwa(n1);
 		py = &py1;
 		break;
 	case 3:
@@ -100,6 +112,8 @@ int main(int argc, char* argv[]) {
 	else {
 		cout << "Remis :O" << endl;
 	}
+	f1->addToFile(counter_X);
+	f2->addToFile(counter_Y);
 	cout << "Koniec gry." << endl;
 	
 
