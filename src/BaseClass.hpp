@@ -12,7 +12,7 @@ public:
 	void setStartParameters(Player_X* px, Player_Y* py);
 	bool getFromX(Player_X* px, int x1, int y1);
 	bool getFromY(Player_Y* py, int x1, int y1);
-	bool checkIfComplete();
+	bool checkIfComplete(Player_X* px, Player_Y* py);
 	int countX();
 	int countY();
 	~Base() { };

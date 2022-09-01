@@ -64,17 +64,25 @@ int main(int argc, char* argv[]) {
 		playerX = 0;
 		//system("cls");
 		b->showDesk();
-		endGame = b->checkIfComplete();
+		endGame = b->checkIfComplete(px,py);
 		if (endGame == 1)
 			break;
-
+		int c = 0;
 		while(playerY != 1) {
 			playerY = b->getFromY(py, x, y);
+			c++;
+			if (c == 2) {
+				py->setX1(-1);
+				py->setY1(-1);
+				cout << "Nie ma mozliwosci ruchu" << endl;
+				break;
+			}
 		}
+		c = 0;
 		playerY = 0;
 		//system("cls");
 		b->showDesk();
-		endGame = b->checkIfComplete();
+		endGame = b->checkIfComplete(px,py);
 		if (endGame == 1)
 			break;
 

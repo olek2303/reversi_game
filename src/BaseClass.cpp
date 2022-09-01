@@ -474,7 +474,7 @@ bool Base::getFromY(Player_Y* py, int x2, int y2) {
 	return checkAll;
 }
 
-bool Base::checkIfComplete() {
+bool Base::checkIfComplete(Player_X* px, Player_Y* py) {
 	bool x = 0;
 	bool y = 0;
 	bool f = 0;
@@ -486,19 +486,7 @@ bool Base::checkIfComplete() {
 			if (tab[i][j] == 'Y') {
 				y = 1;
 			}
-		} 
-	}
-
-	if (x == 1 && y == 1) { //gra sie nie konczy
-		return 0;
-	}
-
-	if (x == 0 && y == 1) { //wygral Y
-		return 1;
-	}
-
-	if (x == 1 && y == 0) { //wygral X
-		return 1;
+		}
 	}
 
 	for (int i = 0; i < 8; i++) { //czy plansza jest zapelniona
@@ -508,7 +496,24 @@ bool Base::checkIfComplete() {
 		}
 	}
 
-	cout << "Koniec gry" << endl;
+	if (x == 1 && y == 1) { //gra sie nie konczy
+		f = 0;
+	}
+
+	if (x == 0 && y == 1) { //wygral Y
+		f = 1;
+	}
+
+	if (x == 1 && y == 0) { //wygral X
+		f = 1;
+	}
+
+	if ((px->get_X() == -1 || px->get_Y() == -1) && (py->get_X() == -1 || py->get_Y() == -1)) {
+		f = 1;
+	}
+
+	if(f == 1) 
+		cout << "Koniec gry" << endl;
  
 	return f;
 }
