@@ -46,7 +46,7 @@ void Base::setStartParameters(Player_Y* px, Player_Y* py) { //ustawienie poczatk
 
 }
 
-bool Base::getFrom(Player_Y* px, int x1, int y1, char moj, char przeciw, int turn) {
+bool Base::getFrom(Player_Y* px, int x1, int y1, char moj, char przeciw, int turn, int wybor) {
 	bool check = 0;
 	bool checkAll = 0; //ta zmienna sprawdza czy chociaz raz zostalo przjete pole przeciwnika, jezeli tak to zalicza sie ruch
 	if (turn == 0) {
@@ -55,10 +55,14 @@ bool Base::getFrom(Player_Y* px, int x1, int y1, char moj, char przeciw, int tur
 		cout << "Podaj wartosc y na ktorej pozycji ustawic gracza X: " << endl;
 		y1 = px->setY();
 	}
-	if (turn == 1) {
+	if (turn == 1 && wybor == 1) {
 		cout << "Podaj wartosc x na ktorej pozycji ustawic gracza Y: " << endl;
 		x1 = px->setX();
 		cout << "Podaj wartosc y na ktorej pozycji ustawic gracza Y: " << endl;
+		y1 = px->setY();
+	}
+	if (turn == 1 && wybor == 2) {
+		x1 = px->setX();
 		y1 = px->setY();
 	}
 	//1. sprawdz czy podane wspolrzedne sa w przedziale [0,7]
@@ -74,23 +78,27 @@ bool Base::getFrom(Player_Y* px, int x1, int y1, char moj, char przeciw, int tur
 		//3. sprawdz pion
 		//sprawdzam pion w dó³
 		if (tab[x1 + 1][y1] == przeciw) {
-			for (int i = 0; i <= x1 + 1; i++) {
-				if (tab[x1 + 1 + i][y1] == moj) {
+			for (int i = x1 + 1; i < 8; i++) {
+				if (tab[i + 1][y1] == '.')
+					break;
+				if (tab[i + 1][y1] == moj) {
 					possible = 1;
 					break;
 				}
 			}
 			if (possible == 1) {
-				for (int i = 0; i <= x1 + 1; i++) {
-					if (tab[x1 + 1 + i][y1] == '.') {//sytuacja ze jest puste miedzy polami
+				for (int i = x1 + 1; i < 8; i++) {
+					if (tab[i + 1][y1] == '.') {//sytuacja ze jest puste miedzy polami
 						check = 0;
 						break;
 					}
-					if (tab[x1 + i][y1] == przeciw) {
+					if (tab[i][y1] == przeciw) {
 						tab[x1][y1] = moj;
-						tab[x1 + i][y1] = moj;
+						tab[i][y1] = moj;
 						check = checkAll = 1;
 					}
+					if (tab[i + 1][y1] == moj)
+						break;
 				}
 			}
 		}
@@ -98,23 +106,27 @@ bool Base::getFrom(Player_Y* px, int x1, int y1, char moj, char przeciw, int tur
 		possible = 0;
 		//sprawdzam pion w górê
 		if (tab[x1 - 1][y1] == przeciw) {
-			for (int i = 0; 7 - i >= x1 - 1; i++) {
-				if (tab[x1 - 1 -i][y1] == moj) {
+			for (int i = x1 - 1; i > -1; i--) {
+				if (tab[i - 1][y1] == '.')
+					break;
+				if (tab[i - 1][y1] == moj) {
 					possible = 1;
 					break;
 				}
 			}
 			if (possible == 1) {
-				for (int i = 0; 7 - i >= x1 - 1; i++) {
-					if (tab[x1 - 1 -i][y1] == '.') {//sytuacja ze jest puste miedzy polami
+				for (int i = x1 - 1; i > -1; i--) {
+					if (tab[i - 1][y1] == '.') {//sytuacja ze jest puste miedzy polami
 						check = 0;
 						break;
 					}
-					if (tab[x1 - i][y1] == przeciw) {
+					if (tab[i][y1] == przeciw) {
 						tab[x1][y1] = moj;
-						tab[x1 - i][y1] = moj;
+						tab[i][y1] = moj;
 						check = checkAll = 1;
 					}
+					if (tab[i - 1][y1] == moj)
+						break;
 				}
 			}
 		}
@@ -123,23 +135,27 @@ bool Base::getFrom(Player_Y* px, int x1, int y1, char moj, char przeciw, int tur
 		//4. sprawdz poziom
 		//sprawdzam poziom w prawo
 		if (tab[x1][y1 + 1] == przeciw) {
-			for (int i = 0; i <= y1 + 1; i++) {
-				if (tab[x1][y1 + 1 + i] == moj) {
+			for (int i = y1 + 1; i < 8; i++) {
+				if (tab[x1][i + 1] == '.')
+					break;
+				if (tab[x1][i + 1] == moj) {
 					possible = 1;
 					break;
 				}
 			}
 			if (possible == 1) {
-				for (int i = 0; i <= y1 + 1; i++) {
-					if (tab[x1][y1 + 1 + i] == '.') {//sytuacja ze jest puste miedzy polami
+				for (int i = y1 + 1; i < 8; i++) {
+					if (tab[x1][i + 1] == '.') {//sytuacja ze jest puste miedzy polami
 						check = 0;
 						break;
 					}
-					if (tab[x1][y1 + i] == przeciw) {
+					if (tab[x1][i] == przeciw) {
 						tab[x1][y1] = moj;
-						tab[x1][y1 + i] = moj;
+						tab[x1][i] = moj;
 						check = checkAll = 1;
 					}
+					if (tab[x1][i + 1] == moj)
+						break;
 				}
 			}
 		}
@@ -147,23 +163,27 @@ bool Base::getFrom(Player_Y* px, int x1, int y1, char moj, char przeciw, int tur
 		possible = 0;
 		//sprawdzam poziom w lewo
 		if (tab[x1][y1 - 1] == przeciw) {
-			for (int i = 0; 7 - i >= y1 - 1; i++) {
-				if (tab[x1][y1 - 1 - i] == moj) {
+			for (int i = y1 - 1; i > -1; i--) {
+				if (tab[x1][i - 1] == '.')
+					break;
+				if (tab[x1][i - 1] == moj) {
 					possible = 1;
 					break;
 				}
 			}
 			if (possible == 1) {
-				for (int i = 0; 7 - i >= y1 - 1; i++) {
-					if (tab[x1][y1 - 1 - i] == '.') {//sytuacja ze jest puste miedzy polami
+				for (int i = y1 - 1; i > -1; i--) {
+					if (tab[x1][i - 1] == '.') {//sytuacja ze jest puste miedzy polami
 						check = 0;
 						break;
 					}
-					if (tab[x1][y1 - i] == przeciw) {
+					if (tab[x1][i] == przeciw) {
 						tab[x1][y1] = moj;
-						tab[x1][y1 - i] = moj;
+						tab[x1][i] = moj;
 						check = checkAll = 1;
 					}
+					if (tab[x1][i - 1] == moj)
+						break;
 				}
 			}
 		}
@@ -264,7 +284,7 @@ bool Base::getFrom(Player_Y* px, int x1, int y1, char moj, char przeciw, int tur
 		}
 	}
 	
-	if (checkAll == 0) {
+	if (checkAll == 0 && wybor != 2) {
 		cout << "RUCH NIEMOZLIWY!!!!" << endl;
 	}
 	return checkAll;

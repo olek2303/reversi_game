@@ -1,6 +1,2 @@
 ﻿  main.cpp
-C:\Users\Jarek\source\repos\reversi_game\src\BaseClass.h(10,10): warning C4154: usunięcie wyrażenia tablicowego; dostarczono konwersji do wskaźnika
-  Player_X.cpp
-  Player_Y.cpp
-  Generowanie kodu...
   reversi.vcxproj -> C:\Users\Jarek\source\repos\reversi_game\src\x64\Debug\reversi.exe

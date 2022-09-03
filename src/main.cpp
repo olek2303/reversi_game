@@ -40,6 +40,8 @@ int main(int argc, char* argv[]) {
 			;
 	}
 
+	int wybor = 0;
+
 	switch (start) {
 	case 1:
 		cout << "Nick gracza pierwszego: ";
@@ -48,12 +50,14 @@ int main(int argc, char* argv[]) {
 		cout << "Nick gracza drugiego: ";
 		cin >> n1;
 		f2->setNazwa(n1);
+		wybor = 1;
 		break;
 	case 2:
 		cout << "Nick gracza: ";
 		cin >> n1;
 		f1->setNazwa(n1);
 		py = &py1;
+		wybor = 2;
 		break;
 	case 3:
 	default: 
@@ -68,7 +72,7 @@ int main(int argc, char* argv[]) {
 	while (endGame != 1) {
 		if (counter % 2 == 0) {
 			while (playerX != 1) {
-				playerX = b->getFrom(px, x, y, 'X', 'Y', 0);
+				playerX = b->getFrom(px, x, y, 'X', 'Y', 0, wybor);
 			}
 		}
 		counter++;
@@ -81,7 +85,7 @@ int main(int argc, char* argv[]) {
 		int c = 0;
 		if (counter % 2 != 0) {
 			while (playerY != 1) {
-				playerY = b->getFrom(py, x, y, 'Y', 'X', 1);
+				playerY = b->getFrom(py, x, y, 'Y', 'X', 1, wybor);
 				c++;
 				if (c == 150) {
 					py->setX1(-1);

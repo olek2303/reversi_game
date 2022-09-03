@@ -10,7 +10,7 @@ public:
 	void infoGame();
 	void showDesk();
 	void setStartParameters(Player_Y* px, Player_Y* py);
-	bool getFrom(Player_Y* px, int x1, int y1, char moj, char przeciw, int turn);
+	bool getFrom(Player_Y* px, int x1, int y1, char moj, char przeciw, int turn, int wybor);
 	bool checkIfComplete(Player_Y* px, Player_Y* py);
 	int countX();
 	int countY();
